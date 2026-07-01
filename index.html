@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tra cứu thôn mới &ndash; thôn cũ xã Đan Hải</title>
+<title>Tra cứu thôn mới &ndash; thôn cũ &middot; xã Đan Hải</title>
 <style>
   :root{
     --paper:#f6f1e7;
@@ -62,7 +62,7 @@
     color:var(--ink-soft);
     font-size:14.5px;
     line-height:1.6;
-    max-width:520px;
+    max-width:540px;
     margin:0 auto;
   }
   .rule{
@@ -161,7 +161,7 @@
   .card-name{
     font-size:22px;
     font-weight:600;
-    margin:0 0 12px;
+    margin:0 0 4px;
     color:var(--ink);
   }
   .card-name .stt{
@@ -178,23 +178,42 @@
     width:22px;height:22px;
     vertical-align:middle;
   }
+  .card-total{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:13px;
+    color:var(--seal-dark);
+    margin:0 0 14px;
+  }
+  .card-total b{font-weight:700;}
   .old-list{
     display:flex;
-    flex-wrap:wrap;
-    gap:8px;
+    flex-direction:column;
+    gap:6px;
   }
-  .old-chip{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:13.5px;
+  .old-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:10px;
     background:var(--paper-dark);
     border:1px solid var(--line);
-    border-radius:20px;
-    padding:6px 13px;
+    border-radius:4px;
+    padding:8px 13px;
+  }
+  .old-row .name{
+    font-size:14px;
     color:var(--ink);
   }
-  .old-chip .note{
+  .old-row .name .note{
     color:var(--seal-dark);
     font-style:italic;
+    font-size:12.5px;
+  }
+  .old-row .figs{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12px;
+    color:var(--ink-soft);
+    white-space:nowrap;
   }
   .arrow-line{
     font-family:"Helvetica Neue",Arial,sans-serif;
@@ -205,6 +224,12 @@
     font-size:19px;
     font-weight:600;
     color:var(--seal-dark);
+  }
+  .target-figs{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    margin-top:4px;
   }
 
   .empty{
@@ -217,35 +242,46 @@
 
   .browse{
     margin-top:8px;
+    overflow-x:auto;
   }
   table{
     width:100%;
     border-collapse:collapse;
     font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:14px;
+    font-size:13.5px;
     background:var(--card);
     border:1px solid var(--line);
   }
   thead th{
     text-align:left;
-    font-size:10.5px;
-    letter-spacing:.14em;
+    font-size:10px;
+    letter-spacing:.12em;
     text-transform:uppercase;
     color:var(--paper);
     background:var(--ink);
-    padding:10px 14px;
+    padding:10px 12px;
     font-weight:600;
+    white-space:nowrap;
   }
   tbody td{
-    padding:11px 14px;
+    padding:10px 12px;
     border-top:1px solid var(--line);
     vertical-align:top;
   }
   tbody tr:nth-child(odd){background:rgba(163,64,44,0.025);}
-  td.stt-col{color:var(--ink-soft);width:34px;}
+  td.stt-col{color:var(--ink-soft);width:30px;}
   td.new-col{font-weight:600;color:var(--seal-dark);white-space:nowrap;}
   td.old-col{color:var(--ink-soft);}
   td.old-col span.note{font-style:italic;color:var(--seal-dark);}
+  td.num-col{width:78px;text-align:right;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums;}
+  tfoot td{
+    padding:11px 12px;
+    border-top:2px solid var(--ink);
+    font-weight:700;
+    color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  tfoot td.num-col{text-align:right;}
 
   footer{
     margin-top:50px;
@@ -254,7 +290,9 @@
     color:var(--ink-soft);
     text-align:center;
     letter-spacing:.03em;
+    line-height:1.7;
   }
+  footer .src{color:var(--seal-dark);}
 
   @media (max-width:520px){
     header{padding-top:34px;}
@@ -267,19 +305,33 @@
       margin-bottom:10px;
       background:var(--card);
     }
-    tbody td{border-top:none;padding:6px 14px;}
+    tbody td{border-top:none;padding:5px 14px;}
     td.stt-col{display:none;}
     td.new-col{padding-top:12px;font-size:15px;}
-    td.old-col{padding-bottom:12px;}
+    td.old-col{padding-bottom:8px;}
+    td.num-col{
+      display:flex;
+      justify-content:space-between;
+      text-align:left;
+    }
+    td.num-col:before{
+      content:attr(data-label);
+      font-size:11px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--ink-soft);
+    }
+    td.num-col:last-child{padding-bottom:12px;}
+    tfoot{display:none;}
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="eyebrow">ỦY BAN NHÂN DÂN XÃ ĐAN HẢI</div>
+  <div class="eyebrow">Nghị quyết số 13/NQ-HĐND &middot; xã Đan Hải</div>
   <h1>Tra cứu <em>thôn mới</em> &ndash; <em>thôn cũ</em></h1>
-  <p class="sub">Nhập tên thôn mới để xem các thôn cũ đã sáp nhập, hoặc nhập tên thôn cũ để tìm thôn mới hiện nay.</p>
+  <p class="sub">Nhập tên thôn mới để xem các thôn cũ đã sáp nhập cùng số hộ, số dân, hoặc nhập tên thôn cũ để tìm thôn mới hiện nay.</p>
   <div class="rule"></div>
 </header>
 
@@ -294,38 +346,102 @@
 
 <main id="main"></main>
 
-<footer>15 thôn mới &middot; được sáp nhập từ các thôn, xóm cũ</footer>
+<footer>
+  15 thôn mới &middot; sáp nhập từ 31 thôn cũ trên địa bàn xã Đan Hải<br>
+  <span class="src">Theo Nghị quyết số 13/NQ&#8209;HĐND ngày 30/6/2026 của HĐND xã Đan Hải</span>
+</footer>
 
 <script>
 const RAW = [
- {new:"Lam Hồng", olds:["Trường Lam","Hồng Thủy","Lam Long"]},
- {new:"Đông Hải", olds:["Dương Phòng Lục","Trung Vân (Hải Vân cũ)"]},
- {new:"Tiên Tiến", olds:["Đông Biên","Trung Vân (Hải Trung cũ)"]},
- {new:"Văn Lâm", olds:["Hợp Thuận","Kiều Văn"]},
- {new:"Lam Phong", olds:["Phúc An","Ninh Hoà"]},
- {new:"Thống Nhất", olds:["Thống Nhất","Trường An"]},
- {new:"Lĩnh Giang", olds:["Song Giang","Lĩnh Thành"]},
- {new:"Đan Lương", olds:["Bình Phúc","Lương Ninh","Kiều Thắng Lợi"]},
- {new:"Long Hải", olds:["Thanh Vân Hải","Long Thuỷ"]},
- {new:"Quý Hoa", olds:["Quý Du Châu","Tỉnh Phú Hoa (Trường Hoa cũ)"]},
- {new:"Phúc Lộc", olds:["Lộc Hạnh","Hợp Phúc","Tỉnh Phú Hoa (Trường Tỉnh cũ)"]},
- {new:"Quyết Thắng", olds:["Hội Thành","Thái Phong"]},
- {new:"Minh Tiến", olds:["An Toàn Long","Tân Ninh Châu"]},
- {new:"Phú Minh", olds:["Hội Minh","Phú Quý"]},
- {new:"Phú Cường", olds:["Hội Tiến","Hội Thuỷ"]}
+ {new:"Lam Hồng", olds:[
+   {name:"Trường Lam", hoGiaDinh:206, nhanKhau:834},
+   {name:"Hồng Thuỷ", hoGiaDinh:231, nhanKhau:904},
+   {name:"Lam Long", hoGiaDinh:213, nhanKhau:874}
+ ]},
+ {new:"Đông Hải", olds:[
+   {name:"Dương Phòng Lục", hoGiaDinh:303, nhanKhau:1288},
+   {name:"Trung Vân (Hải Vân cũ)", hoGiaDinh:75, nhanKhau:311}
+ ]},
+ {new:"Tiên Tiến", olds:[
+   {name:"Đông Biên", hoGiaDinh:211, nhanKhau:872},
+   {name:"Trung Vân (Hải Trung cũ)", hoGiaDinh:163, nhanKhau:707}
+ ]},
+ {new:"Văn Lâm", olds:[
+   {name:"Hợp Thuận", hoGiaDinh:200, nhanKhau:718},
+   {name:"Kiều Văn", hoGiaDinh:236, nhanKhau:926}
+ ]},
+ {new:"Lam Phong", olds:[
+   {name:"Phúc An", hoGiaDinh:221, nhanKhau:922},
+   {name:"Ninh Hoà", hoGiaDinh:193, nhanKhau:779}
+ ]},
+ {new:"Thống Nhất", olds:[
+   {name:"Thống Nhất", hoGiaDinh:363, nhanKhau:1531},
+   {name:"Trường An", hoGiaDinh:153, nhanKhau:657}
+ ]},
+ {new:"Lĩnh Giang", olds:[
+   {name:"Song Giang", hoGiaDinh:145, nhanKhau:512},
+   {name:"Lĩnh Thành", hoGiaDinh:208, nhanKhau:759}
+ ]},
+ {new:"Đan Lương", olds:[
+   {name:"Bình Phúc", hoGiaDinh:225, nhanKhau:808},
+   {name:"Lương Ninh", hoGiaDinh:152, nhanKhau:508},
+   {name:"Kiều Thắng Lợi", hoGiaDinh:228, nhanKhau:773}
+ ]},
+ {new:"Long Hải", olds:[
+   {name:"Thanh Văn Hải", hoGiaDinh:341, nhanKhau:1238},
+   {name:"Long Thuỷ", hoGiaDinh:337, nhanKhau:1237}
+ ]},
+ {new:"Quý Hoa", olds:[
+   {name:"Quý Du Châu", hoGiaDinh:367, nhanKhau:1440},
+   {name:"Tỉnh Phú Hoa (Trường Hoa cũ)", hoGiaDinh:110, nhanKhau:414}
+ ]},
+ {new:"Phúc Lộc", olds:[
+   {name:"Lộc Hạnh", hoGiaDinh:204, nhanKhau:722},
+   {name:"Hợp Phúc", hoGiaDinh:214, nhanKhau:821},
+   {name:"Tỉnh Phú Hoa (Trường Tỉnh cũ)", hoGiaDinh:163, nhanKhau:549}
+ ]},
+ {new:"Quyết Thắng", olds:[
+   {name:"Hội Thành", hoGiaDinh:263, nhanKhau:1049},
+   {name:"Thái Phong", hoGiaDinh:207, nhanKhau:847}
+ ]},
+ {new:"Minh Tiến", olds:[
+   {name:"An Toàn Long", hoGiaDinh:258, nhanKhau:984},
+   {name:"Tân Ninh Châu", hoGiaDinh:230, nhanKhau:900}
+ ]},
+ {new:"Phú Minh", olds:[
+   {name:"Hội Minh", hoGiaDinh:204, nhanKhau:699},
+   {name:"Phú Quý", hoGiaDinh:199, nhanKhau:791}
+ ]},
+ {new:"Phú Cường", olds:[
+   {name:"Hội Tiến", hoGiaDinh:181, nhanKhau:692},
+   {name:"Hội Thuỷ", hoGiaDinh:310, nhanKhau:1202}
+ ]}
 ];
 
-function parseOld(s){
-  const m = s.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
-  if(m) return {full:s, base:m[1].trim(), note:m[2].trim()};
-  return {full:s, base:s.trim(), note:null};
+function parseOld(o){
+  const m = o.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  const base = m ? m[1].trim() : o.name.trim();
+  const note = m ? m[2].trim() : null;
+  return {full:o.name, base, note, hoGiaDinh:o.hoGiaDinh, nhanKhau:o.nhanKhau};
 }
 
-const DATA = RAW.map((r,i)=>({
-  stt:i+1,
-  new:r.new,
-  olds:r.olds.map(parseOld)
-}));
+// Tổng số hộ / nhân khẩu lấy đúng theo Điều 1 của Nghị quyết (một vài mục cộng dồn
+// chi tiết từng thôn cũ lệch vài chục nhân khẩu so với tổng đã công bố — có thể do
+// sai số khi đánh máy trong văn bản gốc — nên ưu tiên dùng số tổng chính thức).
+const TOTALS = {
+  "Lam Hồng":[650,2612], "Đông Hải":[378,1588], "Tiên Tiến":[374,1590],
+  "Văn Lâm":[436,1644], "Lam Phong":[414,1701], "Thống Nhất":[516,2188],
+  "Lĩnh Giang":[353,1271], "Đan Lương":[605,2089], "Long Hải":[678,2475],
+  "Quý Hoa":[477,1880], "Phúc Lộc":[581,2066], "Quyết Thắng":[470,1896],
+  "Minh Tiến":[488,1884], "Phú Minh":[403,1490], "Phú Cường":[491,1894]
+};
+const DATA = RAW.map((r,i)=>{
+  const olds = r.olds.map(parseOld);
+  const [hoGiaDinh, nhanKhau] = TOTALS[r.new];
+  return {stt:i+1, new:r.new, olds, hoGiaDinh, nhanKhau};
+});
+
+function fmt(n){ return n.toLocaleString('vi-VN'); }
 
 function normalize(str){
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
@@ -347,14 +463,19 @@ function renderBrowse(){
       <td class="stt-col">${d.stt}</td>
       <td class="new-col">${d.new}</td>
       <td class="old-col">${oldsHtml}</td>
+      <td class="num-col" data-label="Số hộ">${fmt(d.hoGiaDinh)}</td>
+      <td class="num-col" data-label="Số dân">${fmt(d.nhanKhau)}</td>
     </tr>`;
   }).join('');
+  const totalHo = DATA.reduce((s,d)=>s+d.hoGiaDinh,0);
+  const totalDan = DATA.reduce((s,d)=>s+d.nhanKhau,0);
   main.innerHTML = `
     <div class="results-label">Toàn bộ danh sách</div>
     <div class="browse">
       <table>
-        <thead><tr><th style="width:34px">TT</th><th>Thôn mới</th><th>Thôn cũ</th></tr></thead>
+        <thead><tr><th style="width:26px">TT</th><th>Thôn mới</th><th>Thôn cũ</th><th style="text-align:right">Số hộ</th><th style="text-align:right">Số dân</th></tr></thead>
         <tbody>${rows}</tbody>
+        <tfoot><tr><td></td><td colspan="2">Toàn xã (15 thôn)</td><td class="num-col">${fmt(totalHo)}</td><td class="num-col">${fmt(totalDan)}</td></tr></tfoot>
       </table>
     </div>`;
 }
@@ -366,13 +487,13 @@ function renderResults(query){
   DATA.forEach(d=>{
     d.olds.forEach(o=>{
       if(normalize(o.base).includes(nq) || normalize(o.full).includes(nq)){
-        oldMatches.push({old:o, newName:d.new, stt:d.stt});
+        oldMatches.push({old:o, newName:d.new, stt:d.stt, newHo:d.hoGiaDinh, newDan:d.nhanKhau});
       }
     });
   });
 
   if(newMatches.length===0 && oldMatches.length===0){
-    main.innerHTML = `<div class="empty">Không tìm thấy thôn nào khớp với “${query}”.<br>Thử nhập tên ngắn gọn hơn, ví dụ chỉ một phần tên thôn.</div>`;
+    main.innerHTML = `<div class="empty">Không tìm thấy thôn nào khớp với &ldquo;${query}&rdquo;.<br>Thử nhập tên ngắn gọn hơn, ví dụ chỉ một phần tên thôn.</div>`;
     return;
   }
 
@@ -381,16 +502,19 @@ function renderResults(query){
   if(newMatches.length){
     html += `<div class="results-label">Thôn mới &rarr; các thôn cũ</div>`;
     newMatches.forEach(d=>{
-      const chips = d.olds.map(o=>{
-        return o.note
-          ? `<span class="old-chip">${o.base} <span class="note">(${o.note})</span></span>`
-          : `<span class="old-chip">${o.base}</span>`;
+      const rows = d.olds.map(o=>{
+        const label = o.note ? `${o.base} <span class="note">(${o.note})</span>` : o.base;
+        return `<div class="old-row">
+          <span class="name">${label}</span>
+          <span class="figs">${fmt(o.hoGiaDinh)} hộ &middot; ${fmt(o.nhanKhau)} nhân khẩu</span>
+        </div>`;
       }).join('');
       html += `<div class="card">
         <div class="card-top">Thôn mới</div>
         <p class="card-name"><span class="stt">${d.stt}</span>${d.new}</p>
+        <p class="card-total">Tổng cộng: <b>${fmt(d.hoGiaDinh)} hộ</b> &middot; <b>${fmt(d.nhanKhau)} nhân khẩu</b></p>
         <div class="arrow-line" style="margin-bottom:8px;">Sáp nhập từ các thôn cũ:</div>
-        <div class="old-list">${chips}</div>
+        <div class="old-list">${rows}</div>
       </div>`;
     });
   }
@@ -400,10 +524,11 @@ function renderResults(query){
     oldMatches.forEach(m=>{
       const label = m.old.note ? `${m.old.base} <span class="note">(${m.old.note})</span>` : m.old.base;
       html += `<div class="card reverse">
-        <div class="card-top">Thôn cũ</div>
+        <div class="card-top">Thôn cũ &middot; ${fmt(m.old.hoGiaDinh)} hộ, ${fmt(m.old.nhanKhau)} nhân khẩu</div>
         <p class="card-name">${label}</p>
         <div class="arrow-line">Nay thuộc thôn mới:</div>
         <div class="target">${m.newName}</div>
+        <div class="target-figs">Thôn ${m.newName} hiện có ${fmt(m.newHo)} hộ, ${fmt(m.newDan)} nhân khẩu</div>
       </div>`;
     });
   }
