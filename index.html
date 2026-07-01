@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tra cứu thôn mới &ndash; thôn cũ</title>
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-dark:#ece3d0;
+    --ink:#2b2620;
+    --ink-soft:#5a5348;
+    --seal:#a3402c;
+    --seal-dark:#7e2e1e;
+    --line:#c9bda3;
+    --gold:#a3822f;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(163,64,44,0.04), transparent 40%),
+      radial-gradient(circle at 85% 90%, rgba(163,64,44,0.05), transparent 45%);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,"Noto Serif",serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:0 18px 60px;
+  }
+  header{
+    width:100%;
+    max-width:760px;
+    text-align:center;
+    padding:48px 0 20px;
+  }
+  .eyebrow{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--seal);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  h1{
+    font-size:clamp(28px,5vw,42px);
+    margin:0 0 10px;
+    font-weight:600;
+    letter-spacing:.01em;
+    line-height:1.15;
+  }
+  h1 em{
+    font-style:normal;
+    color:var(--seal);
+  }
+  .sub{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    line-height:1.6;
+    max-width:520px;
+    margin:0 auto;
+  }
+  .rule{
+    width:64px;
+    height:2px;
+    background:var(--gold);
+    margin:22px auto 0;
+    opacity:.6;
+  }
+
+  .search-wrap{
+    width:100%;
+    max-width:640px;
+    margin-top:8px;
+    position:sticky;
+    top:14px;
+    z-index:5;
+  }
+  .search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--card);
+    border:1.5px solid var(--line);
+    border-radius:3px;
+    padding:14px 18px;
+    box-shadow:0 8px 24px -12px rgba(43,38,32,0.25);
+  }
+  .search-box svg{flex:0 0 auto;color:var(--ink-soft);}
+  #q{
+    flex:1;
+    border:none;
+    outline:none;
+    background:transparent;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:16px;
+    color:var(--ink);
+  }
+  #q::placeholder{color:#a89f8c;}
+  .clear-btn{
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:var(--ink-soft);
+    font-size:13px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    display:none;
+    padding:4px 6px;
+  }
+  .clear-btn.show{display:inline-block;}
+
+  .hint{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:10px;
+    letter-spacing:.02em;
+  }
+
+  main{
+    width:100%;
+    max-width:680px;
+    margin-top:30px;
+  }
+
+  .results-label{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:700;
+    margin:26px 0 12px 2px;
+  }
+  .results-label:first-child{margin-top:0;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:4px solid var(--seal);
+    border-radius:2px;
+    padding:18px 22px;
+    margin-bottom:14px;
+  }
+  .card.reverse{border-left-color:var(--gold);}
+
+  .card-top{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .card-name{
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 12px;
+    color:var(--ink);
+  }
+  .card-name .stt{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;
+    color:var(--ink-soft);
+    font-weight:400;
+    margin-right:8px;
+    border:1px solid var(--line);
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:22px;height:22px;
+    vertical-align:middle;
+  }
+  .old-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .old-chip{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:13.5px;
+    background:var(--paper-dark);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:6px 13px;
+    color:var(--ink);
+  }
+  .old-chip .note{
+    color:var(--seal-dark);
+    font-style:italic;
+  }
+  .arrow-line{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .target{
+    font-size:19px;
+    font-weight:600;
+    color:var(--seal-dark);
+  }
+
+  .empty{
+    text-align:center;
+    color:var(--ink-soft);
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    padding:50px 20px;
+  }
+
+  .browse{
+    margin-top:8px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:14px;
+    background:var(--card);
+    border:1px solid var(--line);
+  }
+  thead th{
+    text-align:left;
+    font-size:10.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--paper);
+    background:var(--ink);
+    padding:10px 14px;
+    font-weight:600;
+  }
+  tbody td{
+    padding:11px 14px;
+    border-top:1px solid var(--line);
+    vertical-align:top;
+  }
+  tbody tr:nth-child(odd){background:rgba(163,64,44,0.025);}
+  td.stt-col{color:var(--ink-soft);width:34px;}
+  td.new-col{font-weight:600;color:var(--seal-dark);white-space:nowrap;}
+  td.old-col{color:var(--ink-soft);}
+  td.old-col span.note{font-style:italic;color:var(--seal-dark);}
+
+  footer{
+    margin-top:50px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+    letter-spacing:.03em;
+  }
+
+  @media (max-width:520px){
+    header{padding-top:34px;}
+    .card{padding:15px 16px;}
+    table, thead, tbody, th, td, tr{display:block;}
+    thead{display:none;}
+    tbody tr{
+      border:1px solid var(--line);
+      border-left:4px solid var(--seal);
+      margin-bottom:10px;
+      background:var(--card);
+    }
+    tbody td{border-top:none;padding:6px 14px;}
+    td.stt-col{display:none;}
+    td.new-col{padding-top:12px;font-size:15px;}
+    td.old-col{padding-bottom:12px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Sáp nhập đơn vị hành chính</div>
+  <h1>Tra cứu <em>thôn mới</em> &ndash; <em>thôn cũ</em></h1>
+  <p class="sub">Nhập tên thôn mới để xem các thôn cũ đã sáp nhập, hoặc nhập tên thôn cũ để tìm thôn mới hiện nay.</p>
+  <div class="rule"></div>
+</header>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="q" type="text" placeholder="Nhập tên thôn (mới hoặc cũ)..." autocomplete="off" autofocus>
+    <button class="clear-btn" id="clearBtn">Xoá</button>
+  </div>
+  <div class="hint" id="hint">Không cần dấu, không phân biệt hoa thường &mdash; ví dụ: “trung van”, “lam hong”</div>
+</div>
+
+<main id="main"></main>
+
+<footer>15 thôn mới &middot; được sáp nhập từ các thôn, xóm cũ</footer>
+
+<script>
+const RAW = [
+ {new:"Lam Hồng", olds:["Trường Lam","Hồng Thủy","Lam Long"]},
+ {new:"Đông Hải", olds:["Dương Phòng Lục","Trung Vân (Hải Vân cũ)"]},
+ {new:"Tiên Tiến", olds:["Đông Biên","Trung Vân (Hải Trung cũ)"]},
+ {new:"Văn Lâm", olds:["Hợp Thuận","Kiều Văn"]},
+ {new:"Lam Phong", olds:["Phúc An","Ninh Hoà"]},
+ {new:"Thống Nhất", olds:["Thống Nhất","Trường An"]},
+ {new:"Lĩnh Giang", olds:["Song Giang","Lĩnh Thành"]},
+ {new:"Đan Lương", olds:["Bình Phúc","Lương Ninh","Kiều Thắng Lợi"]},
+ {new:"Long Hải", olds:["Thanh Vân Hải","Long Thuỷ"]},
+ {new:"Quý Hoa", olds:["Quý Du Châu","Tỉnh Phú Hoa (Trường Hoa cũ)"]},
+ {new:"Phúc Lộc", olds:["Lộc Hạnh","Hợp Phúc","Tỉnh Phú Hoa (Trường Tỉnh cũ)"]},
+ {new:"Quyết Thắng", olds:["Hội Thành","Thái Phong"]},
+ {new:"Minh Tiến", olds:["An Toàn Long","Tân Ninh Châu"]},
+ {new:"Phú Minh", olds:["Hội Minh","Phú Quý"]},
+ {new:"Phú Cường", olds:["Hội Tiến","Hội Thuỷ"]}
+];
+
+function parseOld(s){
+  const m = s.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+  if(m) return {full:s, base:m[1].trim(), note:m[2].trim()};
+  return {full:s, base:s.trim(), note:null};
+}
+
+const DATA = RAW.map((r,i)=>({
+  stt:i+1,
+  new:r.new,
+  olds:r.olds.map(parseOld)
+}));
+
+function normalize(str){
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/đ/g,'d').replace(/Đ/g,'D')
+    .toLowerCase().trim();
+}
+
+const q = document.getElementById('q');
+const main = document.getElementById('main');
+const clearBtn = document.getElementById('clearBtn');
+const hint = document.getElementById('hint');
+
+function renderBrowse(){
+  let rows = DATA.map(d=>{
+    const oldsHtml = d.olds.map(o=>{
+      return o.note ? `${o.base} <span class="note">(${o.note})</span>` : o.base;
+    }).join(', ');
+    return `<tr>
+      <td class="stt-col">${d.stt}</td>
+      <td class="new-col">${d.new}</td>
+      <td class="old-col">${oldsHtml}</td>
+    </tr>`;
+  }).join('');
+  main.innerHTML = `
+    <div class="results-label">Toàn bộ danh sách</div>
+    <div class="browse">
+      <table>
+        <thead><tr><th style="width:34px">TT</th><th>Thôn mới</th><th>Thôn cũ</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderResults(query){
+  const nq = normalize(query);
+  const newMatches = DATA.filter(d=>normalize(d.new).includes(nq));
+  const oldMatches = [];
+  DATA.forEach(d=>{
+    d.olds.forEach(o=>{
+      if(normalize(o.base).includes(nq) || normalize(o.full).includes(nq)){
+        oldMatches.push({old:o, newName:d.new, stt:d.stt});
+      }
+    });
+  });
+
+  if(newMatches.length===0 && oldMatches.length===0){
+    main.innerHTML = `<div class="empty">Không tìm thấy thôn nào khớp với “${query}”.<br>Thử nhập tên ngắn gọn hơn, ví dụ chỉ một phần tên thôn.</div>`;
+    return;
+  }
+
+  let html = '';
+
+  if(newMatches.length){
+    html += `<div class="results-label">Thôn mới &rarr; các thôn cũ</div>`;
+    newMatches.forEach(d=>{
+      const chips = d.olds.map(o=>{
+        return o.note
+          ? `<span class="old-chip">${o.base} <span class="note">(${o.note})</span></span>`
+          : `<span class="old-chip">${o.base}</span>`;
+      }).join('');
+      html += `<div class="card">
+        <div class="card-top">Thôn mới</div>
+        <p class="card-name"><span class="stt">${d.stt}</span>${d.new}</p>
+        <div class="arrow-line" style="margin-bottom:8px;">Sáp nhập từ các thôn cũ:</div>
+        <div class="old-list">${chips}</div>
+      </div>`;
+    });
+  }
+
+  if(oldMatches.length){
+    html += `<div class="results-label">Thôn cũ &rarr; thôn mới</div>`;
+    oldMatches.forEach(m=>{
+      const label = m.old.note ? `${m.old.base} <span class="note">(${m.old.note})</span>` : m.old.base;
+      html += `<div class="card reverse">
+        <div class="card-top">Thôn cũ</div>
+        <p class="card-name">${label}</p>
+        <div class="arrow-line">Nay thuộc thôn mới:</div>
+        <div class="target">${m.newName}</div>
+      </div>`;
+    });
+  }
+
+  main.innerHTML = html;
+}
+
+function onInput(){
+  const val = q.value.trim();
+  clearBtn.classList.toggle('show', val.length>0);
+  if(val.length===0){
+    hint.style.display = 'block';
+    renderBrowse();
+  } else {
+    hint.style.display = 'none';
+    renderResults(val);
+  }
+}
+
+q.addEventListener('input', onInput);
+clearBtn.addEventListener('click', ()=>{ q.value=''; onInput(); q.focus(); });
+
+renderBrowse();
+</script>
+
+</body>
+</html>
