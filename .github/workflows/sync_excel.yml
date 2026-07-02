@@ -1,0 +1,97 @@
+name: Đồng bộ dữ liệu Excel sang Web
+
+on:
+  push:
+    paths:
+      - '*.xlsx' # Tự động chạy khi có bất kỳ file Excel nào thay đổi
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Kiểm tra mã nguồn
+      uses: actions/checkout@v4
+
+    - name: Cài đặt Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Cài đặt thư viện đọc Excel
+      run: pip install pandas openpyxl
+
+    - name: Chuyển đổi Excel sang JSON và cập nhật index.html
+      run: |
+        python -c "
+        import pandas as pd
+        import json
+        import re
+        import os
+
+        # Tìm file excel bất kỳ trong thư mục gốc
+        excel_files = [f for f in os.listdir('.') if f.endswith('.xlsx')]
+        if not excel_files:
+            print('Không tìm thấy file Excel!')
+            exit(1)
+        
+        excel_file = excel_files[0]
+        print(f'Đang xử lý file: {excel_file}')
+
+        df = pd.read_excel(excel_file)
+        excel_data = df.iloc[5:].copy()
+        excel_data.columns = [
+            'TT', 'Thon_Moi', 'Thon_Cu', 'So_Ho', 'So_Dan', 'So_Dang_Vien',
+            'Bi_Thu_Ten', 'Bi_Thu_SDT', 'Truong_Thon_Ten', 'Truong_Thon_SDT',
+            'BCTMT_Ten', 'BCTMT_SDT', 'Nha_Van_Hoa'
+        ]
+        excel_data = excel_data.dropna(subset=['Thon_Moi'])
+
+        data_list = []
+        for idx, row in excel_data.iterrows():
+            def fmt_sdt(v):
+                v_str = str(v).strip().replace('.0', '')
+                if not v_str or v_str == 'nan': return ''
+                if (v_str.startswith('9') or v_str.startswith('3') or v_str.startswith('8')) and len(v_str) == 9:
+                    return '0' + v_str
+                return v_str
+
+            data_list.append({
+                'stt': int(row['TT']) if pd.notna(row['TT']) else len(data_list)+1,
+                'new': str(row['Thon_Moi']).strip(),
+                'olds': str(row['Thon_Cu']).strip(),
+                'hoGiaDinh': int(row['So_Ho']) if pd.notna(row['So_Ho']) else 0,
+                'nhanKhau': int(row['So_Dan']) if pd.notna(row['So_Dan']) else 0,
+                'dangVien': int(row['So_Dang_Vien']) if pd.notna(row['So_Dang_Vien']) else 0,
+                'btTen': str(row['Bi_Thu_Ten']).strip(),
+                'btSdt': fmt_sdt(row['Bi_Thu_SDT']),
+                'ttTen': str(row['Truong_Thon_Ten']).strip(),
+                'ttSdt': fmt_sdt(row['Truong_Thon_SDT']),
+                'mtTen': str(row['BCTMT_Ten']).strip(),
+                'mtSdt': fmt_sdt(row['BCTMT_SDT']),
+                'nvh': str(row['Nha_Van_Hoa']).strip()
+            })
+
+        json_data = json.dumps(data_list, ensure_ascii=False, indent=2)
+        
+        # Đọc file index.html hiện tại
+        with open('index.html', 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Dùng regex thay thế mảng DATA cũ bằng dữ liệu mới tinh
+        new_content = re.sub(
+            r'const DATA = \[\s*[\s\S]*?\s*\];',
+            f'const DATA = {json_data};',
+            content
+        )
+
+        with open('index.html', 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        print('Đã đồng bộ sang index.html thành công!')
+        "
+
+    - name: Lưu lại thay đổi lên GitHub
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.html
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Tự động cập nhật dữ liệu từ file Excel" && git push)
