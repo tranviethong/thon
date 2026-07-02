@@ -33,7 +33,7 @@
   }
   header{
     width:100%;
-    max-width:760px;
+    max-width:1100px;
     text-align:center;
     padding:48px 0 20px;
   }
@@ -62,7 +62,7 @@
     color:var(--ink-soft);
     font-size:14.5px;
     line-height:1.6;
-    max-width:540px;
+    max-width:640px;
     margin:0 auto;
   }
   .rule{
@@ -75,7 +75,7 @@
 
   .search-wrap{
     width:100%;
-    max-width:640px;
+    max-width:720px;
     margin-top:8px;
     position:sticky;
     top:14px;
@@ -125,7 +125,7 @@
 
   main{
     width:100%;
-    max-width:680px;
+    max-width:1100px;
     margin-top:30px;
   }
 
@@ -145,10 +145,10 @@
     border:1px solid var(--line);
     border-left:4px solid var(--seal);
     border-radius:2px;
-    padding:18px 22px;
+    padding:22px;
     margin-bottom:14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
   }
-  .card.reverse{border-left-color:var(--gold);}
 
   .card-top{
     font-family:"Helvetica Neue",Arial,sans-serif;
@@ -159,32 +159,75 @@
     margin-bottom:6px;
   }
   .card-name{
-    font-size:22px;
+    font-size:24px;
     font-weight:600;
-    margin:0 0 4px;
+    margin:0 0 6px;
     color:var(--ink);
   }
   .card-name .stt{
     font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:11px;
+    font-size:12px;
     color:var(--ink-soft);
     font-weight:400;
-    margin-right:8px;
+    margin-right:10px;
     border:1px solid var(--line);
     border-radius:50%;
     display:inline-flex;
     align-items:center;
     justify-content:center;
-    width:22px;height:22px;
+    width:24px;height:24px;
     vertical-align:middle;
   }
   .card-total{
     font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:13px;
+    font-size:13.5px;
     color:var(--seal-dark);
-    margin:0 0 14px;
+    margin:0 0 16px;
+    border-bottom: 1px solid rgba(201,189,163,0.4);
+    padding-bottom: 8px;
   }
   .card-total b{font-weight:700;}
+  
+  .cadres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 15px 0;
+    padding: 12px 16px;
+    background: rgba(163,130,47,0.05);
+    border: 1px dashed var(--gold);
+    border-radius: 4px;
+  }
+  .cadre-block {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+  .cadre-block span {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--seal);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .cadre-block a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .cadre-block a:hover {
+    text-decoration: underline;
+  }
+  .nvh-alert-box {
+    margin: 12px 0;
+    padding: 10px 14px;
+    background: #fdfaf4;
+    border-left: 3px solid var(--gold);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+
   .old-list{
     display:flex;
     flex-direction:column;
@@ -201,35 +244,15 @@
     padding:8px 13px;
   }
   .old-row .name{
-    font-size:14px;
+    font-size:14.5px;
     color:var(--ink);
-  }
-  .old-row .name .note{
-    color:var(--seal-dark);
-    font-style:italic;
-    font-size:12.5px;
-  }
-  .old-row .figs{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:12px;
-    color:var(--ink-soft);
-    white-space:nowrap;
+    font-weight: 500;
   }
   .arrow-line{
     font-family:"Helvetica Neue",Arial,sans-serif;
     font-size:14px;
     color:var(--ink-soft);
-  }
-  .target{
-    font-size:19px;
-    font-weight:600;
-    color:var(--seal-dark);
-  }
-  .target-figs{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:12.5px;
-    color:var(--ink-soft);
-    margin-top:4px;
+    font-weight: 600;
   }
 
   .empty{
@@ -240,6 +263,7 @@
     padding:50px 20px;
   }
 
+  /* Biểu bảng đồng bộ Excel */
   .browse{
     margin-top:8px;
     overflow-x:auto;
@@ -248,38 +272,43 @@
     width:100%;
     border-collapse:collapse;
     font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:13.5px;
+    font-size:13px;
     background:var(--card);
     border:1px solid var(--line);
   }
   thead th{
     text-align:left;
-    font-size:10px;
-    letter-spacing:.12em;
+    font-size:10.5px;
+    letter-spacing:.08em;
     text-transform:uppercase;
     color:var(--paper);
     background:var(--ink);
-    padding:10px 12px;
+    padding:12px 10px;
     font-weight:600;
     white-space:nowrap;
+    border: 1px solid var(--ink-soft);
   }
   tbody td{
-    padding:10px 12px;
-    border-top:1px solid var(--line);
+    padding:10px;
+    border:1px solid var(--line);
     vertical-align:top;
   }
-  tbody tr:nth-child(odd){background:rgba(163,64,44,0.025);}
-  td.stt-col{color:var(--ink-soft);width:30px;}
+  tbody tr:nth-child(odd){background:rgba(163,64,44,0.02);}
+  td.stt-col{color:var(--ink-soft);width:35px;text-align:center;}
   td.new-col{font-weight:600;color:var(--seal-dark);white-space:nowrap;}
-  td.old-col{color:var(--ink-soft);}
-  td.old-col span.note{font-style:italic;color:var(--seal-dark);}
-  td.num-col{width:78px;text-align:right;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums;}
+  td.old-col{color:var(--ink-soft);min-width:150px;}
+  td.num-col{width:65px;text-align:right;color:var(--ink);white-space:nowrap;font-variant-numeric:tabular-nums;}
+  td.cadre-col{font-size:12.5px;color:var(--ink);line-height:1.45; white-space:nowrap;}
+  td.cadre-col b{color:var(--seal-dark); font-weight:500;}
+  td.nvh-col{color:var(--ink); font-weight:500; font-size:12.5px;}
+  
   tfoot td{
-    padding:11px 12px;
-    border-top:2px solid var(--ink);
+    padding:11px 10px;
+    border:1px solid var(--ink);
     font-weight:700;
     color:var(--ink);
     font-variant-numeric:tabular-nums;
+    background: var(--paper-dark);
   }
   tfoot td.num-col{text-align:right;}
 
@@ -294,21 +323,29 @@
   }
   footer .src{color:var(--seal-dark);}
 
-  @media (max-width:520px){
+  @media (max-width:1024px){
+    td.cadre-col, td.old-col { white-space:normal; min-width:140px; }
+  }
+
+  @media (max-width:768px){
     header{padding-top:34px;}
     .card{padding:15px 16px;}
+    .cadres-grid { grid-template-columns: 1fr; gap: 8px; }
     table, thead, tbody, th, td, tr{display:block;}
     thead{display:none;}
     tbody tr{
       border:1px solid var(--line);
       border-left:4px solid var(--seal);
-      margin-bottom:10px;
+      margin-bottom:12px;
       background:var(--card);
     }
-    tbody td{border-top:none;padding:5px 14px;}
+    tbody td{border:none; border-bottom:1px dashed rgba(201,189,163,0.3); padding:6px 14px;}
     td.stt-col{display:none;}
-    td.new-col{padding-top:12px;font-size:15px;}
-    td.old-col{padding-bottom:8px;}
+    td.new-col{padding-top:12px;font-size:15px; border-bottom: none;}
+    td.old-col:before{content:"Thôn cũ: "; font-size:11px; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:2px;}
+    td.cadre-col:before{content:"Ban cán sự: "; font-size:11px; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:2px;}
+    td.nvh-col:before{content:"Nhà văn hóa: "; font-size:11px; color:var(--ink-soft); font-weight:600; display:inline;}
+    td.cadre-col{white-space:normal;}
     td.num-col{
       display:flex;
       justify-content:space-between;
@@ -321,7 +358,7 @@
       text-transform:uppercase;
       color:var(--ink-soft);
     }
-    td.num-col:last-child{padding-bottom:12px;}
+    td.nvh-col{padding-bottom:12px;}
     tfoot{display:none;}
   }
 </style>
@@ -331,17 +368,17 @@
 <header>
   <div class="eyebrow">ỦY BAN NHÂN DÂN XÃ ĐAN HẢI</div>
   <h1>Tra cứu <em>thôn mới</em> &ndash; <em>thôn cũ</em></h1>
-  <p class="sub">Nhập tên thôn mới để xem các thôn cũ đã sáp nhập cùng số hộ, số dân, hoặc nhập tên thôn cũ để tìm thôn mới hiện nay.</p>
+  <p class="sub">Nhập tên thôn mới/cũ, địa điểm Nhà văn hóa hoặc tìm kiếm theo Tên cán bộ (Bí thư, Thôn trưởng, Trưởng ban Mặt trận) để xem thông tin hành chính.</p>
   <div class="rule"></div>
 </header>
 
 <div class="search-wrap">
   <div class="search-box">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    <input id="q" type="text" placeholder="Nhập tên thôn (mới hoặc cũ)..." autocomplete="off" autofocus>
+    <input id="q" type="text" placeholder="Nhập tên thôn, tên cán bộ hoặc nhà văn hóa..." autocomplete="off" autofocus>
     <button class="clear-btn" id="clearBtn">Xoá</button>
   </div>
-  <div class="hint" id="hint">Không cần dấu, không phân biệt hoa thường &mdash; ví dụ: “trung van”, “lam hong”</div>
+  <div class="hint" id="hint">Hệ thống tự động lọc không cần dấu &mdash; Ví dụ: "hong thuy", "nguyen van thai", "thai phong"</div>
 </div>
 
 <main id="main"></main>
@@ -352,98 +389,29 @@
 </footer>
 
 <script>
-const RAW = [
- {new:"Lam Hồng", olds:[
-   {name:"Trường Lam", hoGiaDinh:206, nhanKhau:834},
-   {name:"Hồng Thuỷ", hoGiaDinh:231, nhanKhau:904},
-   {name:"Lam Long", hoGiaDinh:213, nhanKhau:874}
- ]},
- {new:"Đông Hải", olds:[
-   {name:"Dương Phòng Lục", hoGiaDinh:303, nhanKhau:1288},
-   {name:"Trung Vân (Hải Vân cũ)", hoGiaDinh:75, nhanKhau:311}
- ]},
- {new:"Tiên Tiến", olds:[
-   {name:"Đông Biên", hoGiaDinh:211, nhanKhau:872},
-   {name:"Trung Vân (Hải Trung cũ)", hoGiaDinh:163, nhanKhau:707}
- ]},
- {new:"Văn Lâm", olds:[
-   {name:"Hợp Thuận", hoGiaDinh:200, nhanKhau:718},
-   {name:"Kiều Văn", hoGiaDinh:236, nhanKhau:926}
- ]},
- {new:"Lam Phong", olds:[
-   {name:"Phúc An", hoGiaDinh:221, nhanKhau:922},
-   {name:"Ninh Hoà", hoGiaDinh:193, nhanKhau:779}
- ]},
- {new:"Thống Nhất", olds:[
-   {name:"Thống Nhất", hoGiaDinh:363, nhanKhau:1531},
-   {name:"Trường An", hoGiaDinh:153, nhanKhau:657}
- ]},
- {new:"Lĩnh Giang", olds:[
-   {name:"Song Giang", hoGiaDinh:145, nhanKhau:512},
-   {name:"Lĩnh Thành", hoGiaDinh:208, nhanKhau:759}
- ]},
- {new:"Đan Lương", olds:[
-   {name:"Bình Phúc", hoGiaDinh:225, nhanKhau:808},
-   {name:"Lương Ninh", hoGiaDinh:152, nhanKhau:508},
-   {name:"Kiều Thắng Lợi", hoGiaDinh:228, nhanKhau:773}
- ]},
- {new:"Long Hải", olds:[
-   {name:"Thanh Văn Hải", hoGiaDinh:341, nhanKhau:1238},
-   {name:"Long Thuỷ", hoGiaDinh:337, nhanKhau:1237}
- ]},
- {new:"Quý Hoa", olds:[
-   {name:"Quý Du Châu", hoGiaDinh:367, nhanKhau:1440},
-   {name:"Tỉnh Phú Hoa (Trường Hoa cũ)", hoGiaDinh:110, nhanKhau:414}
- ]},
- {new:"Phúc Lộc", olds:[
-   {name:"Lộc Hạnh", hoGiaDinh:204, nhanKhau:722},
-   {name:"Hợp Phúc", hoGiaDinh:214, nhanKhau:821},
-   {name:"Tỉnh Phú Hoa (Trường Tỉnh cũ)", hoGiaDinh:163, nhanKhau:549}
- ]},
- {new:"Quyết Thắng", olds:[
-   {name:"Hội Thành", hoGiaDinh:263, nhanKhau:1049},
-   {name:"Thái Phong", hoGiaDinh:207, nhanKhau:847}
- ]},
- {new:"Minh Tiến", olds:[
-   {name:"An Toàn Long", hoGiaDinh:258, nhanKhau:984},
-   {name:"Tân Ninh Châu", hoGiaDinh:230, nhanKhau:900}
- ]},
- {new:"Phú Minh", olds:[
-   {name:"Hội Minh", hoGiaDinh:204, nhanKhau:699},
-   {name:"Phú Quý", hoGiaDinh:199, nhanKhau:791}
- ]},
- {new:"Phú Cường", olds:[
-   {name:"Hội Tiến", hoGiaDinh:181, nhanKhau:692},
-   {name:"Hội Thuỷ", hoGiaDinh:310, nhanKhau:1202}
- ]}
+// Đồng bộ chính xác 100% dữ liệu biểu bảng từ file Excel 
+const DATA = [
+  {stt:1, new:"Lam Hồng", olds:"Trường Lam, Hồng Thuỷ, Lam Long", hoGiaDinh:650, nhanKhau:2612, dangVien:115, btTen:"Nguyễn Văn Thái", btSdt:"0913250504", ttTen:"Đinh Thị Thu", ttSdt:"0364646899", mtTen:"Phạm Thị Lân", mtSdt:"0329028832", nvh:"Hồng Thủy"},
+  {stt:2, new:"Đông Hải", olds:"Dương Phòng Lục, Trung Vân (Hải Vân cũ)", hoGiaDinh:378, nhanKhau:1599, dangVien:60, btTen:"Dương Thị Danh", btSdt:"0398048354", ttTen:"Võ Văn Thọ", ttSdt:"0904470116", mtTen:"Nguyễn Thị Thắm", mtSdt:"0372237825", nvh:"Dương Phòng Lục"},
+  {stt:3, new:"Tiên Tiến", olds:"Đông Biên, Trung Vân (Hải Trung cũ)", hoGiaDinh:374, nhanKhau:1579, dangVien:59, btTen:"Cao Thị Hoa", btSdt:"0982542966", ttTen:"Trần Thị Hạnh", ttSdt:"0934434159", mtTen:"Cao Thị Hoa", mtSdt:"0982542966", nvh:"Đông Biên"},
+  {stt:4, new:"Văn Lâm", olds:"Hợp Thuận, Kiều Văn", hoGiaDinh:436, nhanKhau:1644, dangVien:56, btTen:"Trần Thị Nga", btSdt:"0365341752", ttTen:"Lê Văn Công", ttSdt:"0364934806", mtTen:"Trần Văn Cường", mtSdt:"0963455386", nvh:"Kiều Văn"},
+  {stt:5, new:"Lam Phong", olds:"Phúc An, Ninh Hoà", hoGiaDinh:414, nhanKhau:1701, dangVien:62, btTen:"Nguyễn Thị Tuyến", btSdt:"0932451266", ttTen:"Nguyễn Thị Hằng", ttSdt:"0365426751", mtTen:"Phạm Thị Thơ", mtSdt:"0904728123", nvh:"Ninh Hòa"},
+  {stt:6, new:"Thống Nhất", olds:"Thống Nhất, Trường An", hoGiaDinh:516, nhanKhau:2188, dangVien:62, btTen:"Đặng Thị Ánh", btSdt:"0944311075", ttTen:"Trần Văn Thế", ttSdt:"0965180689", mtTen:"Nguyễn Thị Hà Giang", mtSdt:"0915964908", nvh:"Thống Nhất"},
+  {stt:7, new:"Lĩnh Giang", olds:"Song Giang, Lĩnh Thành", hoGiaDinh:353, nhanKhau:1271, dangVien:39, btTen:"Lê Thị Tuyết", btSdt:"0364123400", ttTen:"Hoàng Thị Minh Lệ", ttSdt:"0941490488", mtTen:"Lê Thị Tuyết", mtSdt:"0364123400", nvh:"Lĩnh Thành"},
+  {stt:8, new:"Đan Lương", olds:"Bình Phúc, Lương Ninh, Kiều Thắng Lợi", hoGiaDinh:605, nhanKhau:2089, dangVien:129, btTen:"Trần Thị Trung", btSdt:"0975163717", ttTen:"Lê Thị Hoa", ttSdt:"0854683023", mtTen:"Trần Thị Trung", mtSdt:"0975163717", nvh:"Lương Ninh"},
+  {stt:9, new:"Long Hải", olds:"Thanh Văn Hải, Long Thuỷ", hoGiaDinh:678, nhanKhau:2475, dangVien:96, btTen:"Đoàn Thị Hồng Nhung", btSdt:"0965908186", ttTen:"Trần Thị Dung", ttSdt:"0975207528", mtTen:"Đoàn Thị Hồng Nhung", mtSdt:"0965908186", nvh:"Thanh Văn Hải"},
+  {stt:10, new:"Quý Hoa", olds:"Quý Du Châu, Tỉnh Phú Hoa (Trường Hoa cũ)", hoGiaDinh:477, nhanKhau:1854, dangVien:46, btTen:"Hoàng Tuấn Dũng", btSdt:"0917767667", ttTen:"Trần Thị Luyến", ttSdt:"0342762799", mtTen:"Hoàng Tuấn Dũng", mtSdt:"0917767667", nvh:"Qúy Du Châu"},
+  {stt:11, new:"Phúc Lộc", olds:"Lộc Hạnh, Hợp Phúc, Tỉnh Phú Hoa (Trường Tỉnh cũ)", hoGiaDinh:581, nhanKhau:2092, dangVien:42, btTen:"Đặng Thế Hà", btSdt:"0982131819", ttTen:"Hoàng Thị Bông", ttSdt:"0368575415", mtTen:"Lê Thị Huế", mtSdt:"0815837899", nvh:"Lộc Hạnh"},
+  {stt:12, new:"Quyết Thắng", olds:"Hội Thành, Thái Phong", hoGiaDinh:470, nhanKhau:1896, dangVien:54, btTen:"Trần Xuân Tuấn", btSdt:"0983159568", ttTen:"Nguyễn Thị Thu Hiền", ttSdt:"0977986816", mtTen:"Nguyễn Thị Phương", mtSdt:"0962177738", nvh:"Thái Phong"},
+  {stt:13, new:"Minh Tiến", olds:"An Toàn Long, Tân Ninh Châu", hoGiaDinh:488, nhanKhau:1884, dangVien:45, btTen:"Nguyễn Thị Quỳnh Trang", btSdt:"0349479998", ttTen:"Trần Thị Cúc", ttSdt:"0965645287", mtTen:"Nguyễn Thị Thu Hòa", mtSdt:"0988005178", nvh:"Tân Ninh Châu"},
+  {stt:14, new:"Phú Minh", olds:"Hội Minh, Phú Quý", hoGiaDinh:403, nhanKhau:1490, dangVien:41, btTen:"Võ Tá Tạo", btSdt:"0984686009", ttTen:"Trần Văn Hằng", ttSdt:"0392842083", mtTen:"Võ Văn Thắng", mtSdt:"0394043723", nvh:"Hội Minh"},
+  {stt:15, new:"Phú Cường", olds:"Hội Tiến, Hội Thuỷ", hoGiaDinh:491, nhanKhau:1894, dangVien:30, btTen:"Lê Văn Mạnh", btSdt:"0976942327", ttTen:"Trần Thị Thanh Xuân", ttSdt:"0916210678", mtTen:"Nguyễn Văn Hợi", mtSdt:"0962423452", nvh:"Hội Thủy"}
 ];
-
-function parseOld(o){
-  const m = o.name.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
-  const base = m ? m[1].trim() : o.name.trim();
-  const note = m ? m[2].trim() : null;
-  return {full:o.name, base, note, hoGiaDinh:o.hoGiaDinh, nhanKhau:o.nhanKhau};
-}
-
-// Tổng số hộ / nhân khẩu lấy đúng theo Điều 1 của Nghị quyết (một vài mục cộng dồn
-// chi tiết từng thôn cũ lệch vài chục nhân khẩu so với tổng đã công bố — có thể do
-// sai số khi đánh máy trong văn bản gốc — nên ưu tiên dùng số tổng chính thức).
-const TOTALS = {
-  "Lam Hồng":[650,2612], "Đông Hải":[378,1588], "Tiên Tiến":[374,1590],
-  "Văn Lâm":[436,1644], "Lam Phong":[414,1701], "Thống Nhất":[516,2188],
-  "Lĩnh Giang":[353,1271], "Đan Lương":[605,2089], "Long Hải":[678,2475],
-  "Quý Hoa":[477,1880], "Phúc Lộc":[581,2066], "Quyết Thắng":[470,1896],
-  "Minh Tiến":[488,1884], "Phú Minh":[403,1490], "Phú Cường":[491,1894]
-};
-const DATA = RAW.map((r,i)=>{
-  const olds = r.olds.map(parseOld);
-  const [hoGiaDinh, nhanKhau] = TOTALS[r.new];
-  return {stt:i+1, new:r.new, olds, hoGiaDinh, nhanKhau};
-});
 
 function fmt(n){ return n.toLocaleString('vi-VN'); }
 
 function normalize(str){
+  if (!str) return '';
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     .replace(/đ/g,'d').replace(/Đ/g,'D')
     .toLowerCase().trim();
@@ -456,90 +424,123 @@ const hint = document.getElementById('hint');
 
 function renderBrowse(){
   let rows = DATA.map(d=>{
-    const oldsHtml = d.olds.map(o=>{
-      return o.note ? `${o.base} <span class="note">(${o.note})</span>` : o.base;
-    }).join(', ');
     return `<tr>
       <td class="stt-col">${d.stt}</td>
-      <td class="new-col">${d.new}</td>
-      <td class="old-col">${oldsHtml}</td>
+      <td class="new-col">Thôn ${d.new}</td>
+      <td class="cadre-col">
+        • <b>BT:</b> ${d.btTen} (<a href="tel:${d.btSdt}">${d.btSdt}</a>)<br>
+        • <b>TT:</b> ${d.ttTen} (<a href="tel:${d.ttSdt}">${d.ttSdt}</a>)<br>
+        • <b>MT:</b> ${d.mtTen} (<a href="tel:${d.mtSdt}">${d.mtSdt}</a>)
+      </td>
+      <td class="old-col">${d.olds}</td>
       <td class="num-col" data-label="Số hộ">${fmt(d.hoGiaDinh)}</td>
       <td class="num-col" data-label="Số dân">${fmt(d.nhanKhau)}</td>
+      <td class="num-col" data-label="Đảng viên">${fmt(d.dangVien)}</td>
+      <td class="nvh-col">${d.nvh}</td>
     </tr>`;
   }).join('');
+  
   const totalHo = DATA.reduce((s,d)=>s+d.hoGiaDinh,0);
   const totalDan = DATA.reduce((s,d)=>s+d.nhanKhau,0);
+  const totalDV = DATA.reduce((s,d)=>s+d.dangVien,0);
+  
   main.innerHTML = `
-    <div class="results-label">Toàn bộ danh sách</div>
+    <div class="results-label">Danh sách tổng hợp 15 thôn</div>
     <div class="browse">
       <table>
-        <thead><tr><th style="width:26px">TT</th><th>Thôn mới</th><th>Thôn cũ</th><th style="text-align:right">Số hộ</th><th style="text-align:right">Số dân</th></tr></thead>
+        <thead>
+          <tr>
+            <th style="width:35px; text-align:center">TT</th>
+            <th>Thôn mới</th>
+            <th>Ban cán sự thôn</th>
+            <th>Thôn cũ sáp nhập</th>
+            <th style="text-align:right">Số hộ</th>
+            <th style="text-align:right">Số dân</th>
+            <th style="text-align:right">Đảng viên</th>
+            <th>Địa điểm nhà văn hóa</th>
+          </tr>
+        </thead>
         <tbody>${rows}</tbody>
-        <tfoot><tr><td></td><td colspan="2">Toàn xã (15 thôn)</td><td class="num-col">${fmt(totalHo)}</td><td class="num-col">${fmt(totalDan)}</td></tr></tfoot>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td colspan="3">Toàn xã Đan Hải</td>
+            <td class="num-col">${fmt(totalHo)}</td>
+            <td class="num-col">${fmt(totalDan)}</td>
+            <td class="num-col">${fmt(totalDV)}</td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
     </div>`;
 }
 
 function renderResults(query){
   const nq = normalize(query);
-  const newMatches = DATA.filter(d=>normalize(d.new).includes(nq));
-  const oldMatches = [];
-  DATA.forEach(d=>{
-    d.olds.forEach(o=>{
-      if(normalize(o.base).includes(nq) || normalize(o.full).includes(nq)){
-        oldMatches.push({old:o, newName:d.new, stt:d.stt, newHo:d.hoGiaDinh, newDan:d.nhanKhau});
-      }
-    });
-  });
+  
+  // Mở rộng tìm kiếm quét qua cả trường địa điểm nhà văn hóa (d.nvh)
+  const matches = DATA.filter(d => 
+    normalize(d.new).includes(nq) || 
+    normalize(d.olds).includes(nq) || 
+    normalize(d.btTen).includes(nq) || 
+    normalize(d.ttTen).includes(nq) || 
+    normalize(d.mtTen).includes(nq) ||
+    normalize(d.nvh).includes(nq)
+  );
 
-  if(newMatches.length===0 && oldMatches.length===0){
-    main.innerHTML = `<div class="empty">Không tìm thấy thôn nào khớp với &ldquo;${query}&rdquo;.<br>Thử nhập tên ngắn gọn hơn, ví dụ chỉ một phần tên thôn.</div>`;
+  if(matches.length === 0){
+    main.innerHTML = `<div class="empty">Không tìm thấy thông tin nào khớp với &ldquo;${query}&rdquo;.<br>Vui lòng kiểm tra lại từ khóa tìm kiếm.</div>`;
     return;
   }
 
-  let html = '';
+  let html = `<div class="results-label">Kết quả tìm thấy (${matches.length} thôn)</div>`;
+  
+  matches.forEach(d => {
+    html += `
+      <div class="card">
+        <div class="card-top">Thông tin tra cứu hành chính</div>
+        <p class="card-name"><span class="stt">${d.stt}</span>Thôn ${d.new}</p>
+        <p class="card-total">Quy mô: <b>${fmt(d.hoGiaDinh)} hộ</b> &middot; <b>${fmt(d.nhanKhau)} nhân khẩu</b> &middot; <b>${fmt(d.dangVien)} Đảng viên</b></p>
+        
+        <div class="nvh-alert-box">
+          🏢 <b>Địa điểm Nhà văn hóa thôn hiện tại:</b> Thôn <b>${d.nvh}</b> cũ
+        </div>
 
-  if(newMatches.length){
-    html += `<div class="results-label">Thôn mới &rarr; các thôn cũ</div>`;
-    newMatches.forEach(d=>{
-      const rows = d.olds.map(o=>{
-        const label = o.note ? `${o.base} <span class="note">(${o.note})</span>` : o.base;
-        return `<div class="old-row">
-          <span class="name">${label}</span>
-          <span class="figs">${fmt(o.hoGiaDinh)} hộ &middot; ${fmt(o.nhanKhau)} nhân khẩu</span>
-        </div>`;
-      }).join('');
-      html += `<div class="card">
-        <div class="card-top">Thôn mới</div>
-        <p class="card-name"><span class="stt">${d.stt}</span>${d.new}</p>
-        <p class="card-total">Tổng cộng: <b>${fmt(d.hoGiaDinh)} hộ</b> &middot; <b>${fmt(d.nhanKhau)} nhân khẩu</b></p>
-        <div class="arrow-line" style="margin-bottom:8px;">Sáp nhập từ các thôn cũ:</div>
-        <div class="old-list">${rows}</div>
-      </div>`;
-    });
-  }
+        <div class="arrow-line" style="color: var(--seal); margin-bottom:4px; margin-top:16px;">Ban cán sự thôn hiện tại:</div>
+        <div class="cadres-grid">
+          <div class="cadre-block">
+            <span>Bí thư Chi bộ</span>
+            <b>${d.btTen}</b><br>
+            SĐT: <a href="tel:${d.btSdt}">${d.btSdt}</a>
+          </div>
+          <div class="cadre-block">
+            <span>Thôn trưởng</span>
+            <b>${d.ttTen}</b><br>
+            SĐT: <a href="tel:${d.ttSdt}">${d.ttSdt}</a>
+          </div>
+          <div class="cadre-block">
+            <span>Trưởng ban Công tác Mặt trận</span>
+            <b>${d.mtTen}</b><br>
+            SĐT: <a href="tel:${d.mtSdt}">${d.mtSdt}</a>
+          </div>
+        </div>
 
-  if(oldMatches.length){
-    html += `<div class="results-label">Thôn cũ &rarr; thôn mới</div>`;
-    oldMatches.forEach(m=>{
-      const label = m.old.note ? `${m.old.base} <span class="note">(${m.old.note})</span>` : m.old.base;
-      html += `<div class="card reverse">
-        <div class="card-top">Thôn cũ &middot; ${fmt(m.old.hoGiaDinh)} hộ, ${fmt(m.old.nhanKhau)} nhân khẩu</div>
-        <p class="card-name">${label}</p>
-        <div class="arrow-line">Nay thuộc thôn mới:</div>
-        <div class="target">${m.newName}</div>
-        <div class="target-figs">Thôn ${m.newName} hiện có ${fmt(m.newHo)} hộ, ${fmt(m.newDan)} nhân khẩu</div>
+        <div class="arrow-line" style="margin-bottom:8px; margin-top:16px;">Lịch sử sáp nhập từ các thôn cũ:</div>
+        <div class="old-list">
+          <div class="old-row">
+            <span class="name">${d.olds}</span>
+          </div>
+        </div>
       </div>`;
-    });
-  }
+  });
 
   main.innerHTML = html;
 }
 
 function onInput(){
   const val = q.value.trim();
-  clearBtn.classList.toggle('show', val.length>0);
-  if(val.length===0){
+  clearBtn.classList.toggle('show', val.length > 0);
+  if(val.length === 0){
     hint.style.display = 'block';
     renderBrowse();
   } else {
@@ -551,6 +552,7 @@ function onInput(){
 q.addEventListener('input', onInput);
 clearBtn.addEventListener('click', ()=>{ q.value=''; onInput(); q.focus(); });
 
+// Khởi chạy
 renderBrowse();
 </script>
 
